@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">心灵伴侣</string>
+    <string name="start_experience">开始体验</string>
+    <string name="create_digital_human">创建数字孪生人</string>
+    <string name="select_digital_human">选择数字孪生人</string>
+    <string name="upload_photo_hint">上传照片</string>
+    <string name="name_hint">姓名</string>
+    <string name="gender_hint">性别</string>
+    <string name="personality_hint">性格特征</string>
+    <string name="next">下一步</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
+</resources>
