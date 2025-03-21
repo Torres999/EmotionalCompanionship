@@ -22,6 +22,14 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.select.SelectDigitalHumanActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.create.CreateDigitalHumanActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

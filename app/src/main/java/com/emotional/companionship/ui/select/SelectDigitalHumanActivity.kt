@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import com.emotional.companionship.R
 import com.emotional.companionship.databinding.ActivitySelectDigitalHumanBinding
 import com.emotional.companionship.ui.create.CreateDigitalHumanActivity
 import com.emotional.companionship.data.model.DigitalHuman
@@ -16,9 +18,8 @@ class SelectDigitalHumanActivity : AppCompatActivity(), DigitalHumanClickListene
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySelectDigitalHumanBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_select_digital_human)
+        
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         binding.rvDigitalHumans.adapter = adapter

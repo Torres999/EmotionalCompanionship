@@ -3,7 +3,8 @@ package com.emotional.companionship.ui.splash
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+import androidx.databinding.DataBindingUtil
+import com.emotional.companionship.R
 import com.emotional.companionship.databinding.ActivitySplashBinding
 import com.emotional.companionship.ui.select.SelectDigitalHumanActivity
 import kotlinx.coroutines.flow.collectLatest
@@ -15,10 +16,12 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySplashBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        // 使用 DataBindingUtil 来初始化绑定
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
         
+        // 设置 ViewModel
         binding.viewModel = viewModel
+        // 设置生命周期所有者
         binding.lifecycleOwner = this
         
         setupObservers()

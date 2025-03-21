@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.emotional.companionship.R
 import com.emotional.companionship.databinding.ActivityCreateDigitalHumanBinding
 
@@ -22,8 +23,7 @@ class CreateDigitalHumanActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCreateDigitalHumanBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_create_digital_human)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this

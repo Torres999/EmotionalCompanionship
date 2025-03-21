@@ -1,9 +1,11 @@
 package com.emotional.companionship.ui.create
 
 import android.net.Uri
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
+import java.util.UUID
 
 class CreateDigitalHumanViewModel : ViewModel() {
     val name = MutableLiveData<String>()
@@ -12,7 +14,7 @@ class CreateDigitalHumanViewModel : ViewModel() {
     val avatarUri = MutableLiveData<Uri>()
 
     private val _navigationEvent = MutableLiveData<NavigationEvent>()
-    val navigationEvent = _navigationEvent
+    val navigationEvent: LiveData<NavigationEvent> = _navigationEvent
 
     val isFormValid = name.map { name ->
         !name.isNullOrBlank() && !gender.value.isNullOrBlank() && !personality.value.isNullOrBlank() && avatarUri.value != null
@@ -27,6 +29,7 @@ class CreateDigitalHumanViewModel : ViewModel() {
     }
 
     fun onNextClick() {
+        // TODO: Save digital human data
         _navigationEvent.value = NavigationEvent.NavigateToChat
     }
 

@@ -35,7 +35,7 @@
             android:background="@drawable/bg_upload_image"
             android:onClick="@{() -> viewModel.onUploadClick()}"
             android:padding="32dp"
-            android:src="@drawable/ic_camera"
+            android:src="@{viewModel.avatarUri != null ? viewModel.avatarUri : @drawable/ic_camera}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvTitle" />
