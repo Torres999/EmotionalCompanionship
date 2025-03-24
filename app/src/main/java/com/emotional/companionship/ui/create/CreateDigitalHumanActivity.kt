@@ -5,44 +5,57 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import com.emotional.companionship.R
 import com.emotional.companionship.databinding.ActivityCreateDigitalHumanBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CreateDigitalHumanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCreateDigitalHumanBinding
     private val viewModel: CreateDigitalHumanViewModel by viewModels()
 
-    private val selectImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        uri?.let { viewModel.onImageSelected(it) }
+    private val selectMedia = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        uri?.let { viewModel.onMediaSelected(it) }
+    }
+
+    private val selectExisting = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.let { data ->
+                SelectExistingDigitalHumanActivity.getSelectedDigitalHuman(data)?.let { digitalHuman ->
+                    viewModel.onExistingDigitalHumanSelected(digitalHuman)
+                }
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_create_digital_human)
+        binding = ActivityCreateDigitalHumanBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
-
-        setupGenderDropdown()
+        setupViews()
         setupObservers()
     }
 
-    private fun setupGenderDropdown() {
-        val genders = arrayOf(getString(R.string.male), getString(R.string.female))
-        val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, genders)
-        (binding.tilGender.editText as? android.widget.AutoCompleteTextView)?.setAdapter(adapter)
+    private fun setupViews() {
+        binding.cardSelectExisting.setOnClickListener {
+            viewModel.onSelectExistingClick()
+        }
+        binding.cardUpload.setOnClickListener {
+            viewModel.onUploadClick()
+        }
     }
 
     private fun setupObservers() {
         viewModel.navigationEvent.observe(this) { event ->
             when (event) {
-                is CreateDigitalHumanViewModel.NavigationEvent.SelectImage -> {
-                    selectImage.launch("image/*")
+                is CreateDigitalHumanViewModel.NavigationEvent.NavigateToSelectExisting -> {
+                    SelectExistingDigitalHumanActivity.start(this)
+                }
+                is CreateDigitalHumanViewModel.NavigationEvent.NavigateToUpload -> {
+                    selectMedia.launch("*/*")
                 }
                 is CreateDigitalHumanViewModel.NavigationEvent.NavigateToChat -> {
                     // TODO: Navigate to chat screen

@@ -5,7 +5,7 @@ import java.io.Serializable
 data class DigitalHuman(
     val id: String,
     val name: String,
-    val gender: String,
+    val relation: String,
     val personality: String,
     val avatarUrl: String,
     val lastChatTime: String
