@@ -9,7 +9,6 @@ fun loadImage(view: ImageView, url: String?) {
     if (url != null) {
         Glide.with(view.context)
             .load(url)
-            .centerCrop()
             .into(view)
     }
 } 

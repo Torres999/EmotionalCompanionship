@@ -3,12 +3,9 @@ package com.emotional.companionship.ui.splash
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import com.emotional.companionship.R
 import com.emotional.companionship.databinding.ActivitySplashBinding
 import com.emotional.companionship.ui.select.SelectDigitalHumanActivity
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
@@ -16,15 +13,29 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // 使用 DataBindingUtil 来初始化绑定
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         
-        // 设置 ViewModel
-        binding.viewModel = viewModel
-        // 设置生命周期所有者
-        binding.lifecycleOwner = this
-        
+        // 移除按钮点击事件设置，直接调用导航方法
+        // setupViews()
+        // 自动跳转到SelectDigitalHumanActivity
+        navigateToMainScreen()
         setupObservers()
+    }
+    
+    /*
+    private fun setupViews() {
+        binding.btnStart.setOnClickListener {
+            viewModel.onStartClick()
+        }
+    }
+    */
+    
+    private fun navigateToMainScreen() {
+        // 直接跳转到主界面，不需要点击按钮
+        SelectDigitalHumanActivity.start(this)
+        // 关闭启动页
+        finish()
     }
     
     private fun setupObservers() {

@@ -17,8 +17,33 @@ class SelectDigitalHumanViewModel : ViewModel() {
     }
 
     private fun loadDigitalHumans() {
-        // TODO: Load digital humans from database
-        _digitalHumans.value = emptyList()
+        // 添加测试数据而不是空列表
+        _digitalHumans.value = listOf(
+            DigitalHuman(
+                id = "1",
+                name = "妈妈",
+                relation = "母亲",
+                personality = "温柔体贴，善解人意",
+                avatarUrl = "https://via.placeholder.com/150",
+                lastChatTime = "2025-03-24 10:30"
+            ),
+            DigitalHuman(
+                id = "2",
+                name = "爸爸",
+                relation = "父亲",
+                personality = "严厉认真，不苟言笑",
+                avatarUrl = "https://via.placeholder.com/150",
+                lastChatTime = "2025-03-23 18:15"
+            ),
+            DigitalHuman(
+                id = "3",
+                name = "小明",
+                relation = "朋友",
+                personality = "活泼开朗，乐于助人",
+                avatarUrl = "https://via.placeholder.com/150",
+                lastChatTime = "2025-03-22 12:40"
+            )
+        )
     }
 
     fun onAddClick() {

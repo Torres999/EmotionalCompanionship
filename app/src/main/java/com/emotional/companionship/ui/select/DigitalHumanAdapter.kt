@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.emotional.companionship.data.model.DigitalHuman
 import com.emotional.companionship.databinding.ItemDigitalHumanBinding
 
 class DigitalHumanAdapter(
-    private val listener: DigitalHumanClickListener
+    private val onItemClick: (DigitalHuman) -> Unit
 ) : ListAdapter<DigitalHuman, DigitalHumanAdapter.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,10 +31,20 @@ class DigitalHumanAdapter(
         private val binding: ItemDigitalHumanBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        init {
+            binding.root.setOnClickListener {
+                val position = layoutPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onItemClick(getItem(position))
+                }
+            }
+        }
+
         fun bind(item: DigitalHuman) {
-            binding.item = item
-            binding.listener = listener
-            binding.executePendingBindings()
+            binding.tvName.text = item.name
+            Glide.with(binding.ivAvatar)
+                .load(item.avatarUrl)
+                .into(binding.ivAvatar)
         }
     }
 
