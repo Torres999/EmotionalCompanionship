@@ -40,6 +40,10 @@ class CreateDigitalHumanActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
+        
         binding.cardSelectExisting.setOnClickListener {
             viewModel.onSelectExistingClick()
         }
