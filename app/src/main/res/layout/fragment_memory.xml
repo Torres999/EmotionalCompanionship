@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="#F5F7FA">
 
     <TextView
         android:id="@+id/tvTitle"
@@ -23,11 +23,11 @@
         android:id="@+id/rvMemories"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         android:clipToPadding="false"
+        android:paddingTop="8dp"
         android:paddingBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_memory" />
 
 </androidx.constraintlayout.widget.ConstraintLayout> 

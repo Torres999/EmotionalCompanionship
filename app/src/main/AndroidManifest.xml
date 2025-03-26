@@ -34,7 +34,8 @@
 
         <activity
             android:name=".ui.create.CreateDigitalHumanActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.EmotionalCompanionship.NoActionBar" />
             
         <activity
             android:name=".ui.create.SelectExistingDigitalHumanActivity"

@@ -117,10 +117,10 @@ class SelectDigitalHumanActivity : AppCompatActivity() {
         }
         
         // 移除"记忆库"Fragment（如果有）
-        val historyFragment = supportFragmentManager.findFragmentByTag("history_fragment")
-        if (historyFragment != null) {
+        val memoryFragment = supportFragmentManager.findFragmentByTag("memory_fragment")
+        if (memoryFragment != null) {
             supportFragmentManager.beginTransaction()
-                .remove(historyFragment)
+                .remove(memoryFragment)
                 .commit()
         }
     }
@@ -138,9 +138,17 @@ class SelectDigitalHumanActivity : AppCompatActivity() {
                 .commit()
         }
         
-        // 添加记忆库Fragment提示（实际应添加正确的Fragment）
+        // 添加记忆库Fragment
         binding.fragmentContainer.visibility = View.VISIBLE
-        Toast.makeText(this, "记忆库功能开发中", Toast.LENGTH_SHORT).show()
+        
+        var memoryFragment = supportFragmentManager.findFragmentByTag("memory_fragment") as? com.emotional.companionship.ui.memory.MemoryFragment
+        
+        if (memoryFragment == null) {
+            memoryFragment = com.emotional.companionship.ui.memory.MemoryFragment.newInstance()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, memoryFragment, "memory_fragment")
+                .commit()
+        }
     }
     
     private fun showProfileContent() {
