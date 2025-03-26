@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.emotional.companionship.data.model.Memory
+import com.emotional.companionship.data.model.MemoryItem
 import com.emotional.companionship.databinding.ItemMemoryBinding
 
-class MemoryAdapter : ListAdapter<Memory, MemoryAdapter.ViewHolder>(DiffCallback()) {
+class MemoryAdapter : ListAdapter<MemoryItem, MemoryAdapter.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -28,19 +28,19 @@ class MemoryAdapter : ListAdapter<Memory, MemoryAdapter.ViewHolder>(DiffCallback
         private val binding: ItemMemoryBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Memory) {
+        fun bind(item: MemoryItem) {
             binding.tvTitle.text = item.title
-            binding.tvDateTime.text = item.dateTime
+            binding.tvDateTime.text = item.date
             binding.tvContent.text = item.content
         }
     }
 
-    private class DiffCallback : DiffUtil.ItemCallback<Memory>() {
-        override fun areItemsTheSame(oldItem: Memory, newItem: Memory): Boolean {
+    private class DiffCallback : DiffUtil.ItemCallback<MemoryItem>() {
+        override fun areItemsTheSame(oldItem: MemoryItem, newItem: MemoryItem): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Memory, newItem: Memory): Boolean {
+        override fun areContentsTheSame(oldItem: MemoryItem, newItem: MemoryItem): Boolean {
             return oldItem == newItem
         }
     }

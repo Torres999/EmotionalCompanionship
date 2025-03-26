@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -30,32 +32,40 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
         observeViewModel()
+        
+        // 隐藏标题文本，让Activity的ActionBar显示标题
+        binding.tvTitle.visibility = View.GONE
+        
+        // 直接设置默认头像，避免Glide初始化问题
+        binding.ivAvatar.setImageResource(R.drawable.ic_person)
     }
 
     private fun setupViews() {
-        binding.llPersonalInfo.setOnClickListener {
-            // TODO: Navigate to personal info screen
+        // 设置菜单项点击事件
+        binding.llAccountSettings.setOnClickListener {
+            Toast.makeText(requireContext(), "账号设置", Toast.LENGTH_SHORT).show()
         }
 
         binding.llPrivacySettings.setOnClickListener {
-            // TODO: Navigate to privacy settings screen
+            Toast.makeText(requireContext(), "隐私设置", Toast.LENGTH_SHORT).show()
         }
 
-        binding.llFeedback.setOnClickListener {
-            // TODO: Navigate to feedback screen
+        binding.llNotificationSettings.setOnClickListener {
+            Toast.makeText(requireContext(), "通知设置", Toast.LENGTH_SHORT).show()
         }
 
         binding.llAboutUs.setOnClickListener {
-            // TODO: Navigate to about us screen
+            Toast.makeText(requireContext(), "关于我们", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun observeViewModel() {
         viewModel.user.observe(viewLifecycleOwner) { user ->
             binding.tvName.text = user.name
-            binding.tvDescription.text = user.description
-            // 使用Glide加载头像
-            Glide.with(this).load(user.avatar).placeholder(R.drawable.ic_avatar_placeholder).into(binding.ivAvatar)
+            binding.tvUserId.text = "ID: ${user.userId}"
+            
+            // 简化头像加载，直接使用本地资源
+            binding.ivAvatar.setImageResource(R.drawable.ic_person)
         }
     }
 

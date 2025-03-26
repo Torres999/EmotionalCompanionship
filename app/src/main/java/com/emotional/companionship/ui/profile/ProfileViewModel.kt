@@ -22,10 +22,11 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
         // 模拟从数据库或网络获取用户数据
         _user.value = User(
             id = "1",
-            name = "张三",
+            userId = "888888",
+            name = "用户名",
             description = "情感陪伴用户",
-            avatar = "",
-            email = "zhangsan@example.com"
+            avatar = "", // 使用本地资源，不使用网络图片
+            email = "user@example.com"
         )
     }
 } 

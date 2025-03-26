@@ -1,4 +1,4 @@
-package com.example.emotionalcompanionship.ui.theme
+package com.emotional.companionship.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

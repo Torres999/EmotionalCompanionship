@@ -3,16 +3,23 @@ package com.emotional.companionship.ui.select
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.emotional.companionship.R
 import com.emotional.companionship.databinding.ActivitySelectDigitalHumanBinding
 import com.emotional.companionship.ui.create.CreateDigitalHumanActivity
 import com.emotional.companionship.data.model.DigitalHuman
+import com.emotional.companionship.ui.profile.ProfileFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SelectDigitalHumanActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySelectDigitalHumanBinding
     private val viewModel: SelectDigitalHumanViewModel by viewModels()
@@ -25,8 +32,31 @@ class SelectDigitalHumanActivity : AppCompatActivity() {
         binding = ActivitySelectDigitalHumanBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
+        setupToolbar()
         setupViews()
         setupObservers()
+    }
+    
+    private fun setupToolbar() {
+        // 设置居中的标题视图
+        val titleTextView = TextView(this)
+        titleTextView.layoutParams = androidx.appcompat.widget.Toolbar.LayoutParams(
+            androidx.appcompat.widget.Toolbar.LayoutParams.WRAP_CONTENT,
+            androidx.appcompat.widget.Toolbar.LayoutParams.WRAP_CONTENT,
+            Gravity.CENTER
+        )
+        titleTextView.text = "首页"
+        titleTextView.setTextColor(ContextCompat.getColor(this, android.R.color.black))
+        titleTextView.textSize = 18f
+        binding.toolbar.addView(titleTextView)
+        
+        // 存储标题视图的引用，以便后续更新
+        binding.toolbar.tag = titleTextView
+    }
+    
+    private fun updateTitle(title: String) {
+        val titleTextView = binding.toolbar.tag as? TextView
+        titleTextView?.text = title
     }
 
     private fun setupViews() {
@@ -38,15 +68,20 @@ class SelectDigitalHumanActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    // 已经在首页，无需操作
+                    // 显示主页内容，隐藏其他内容
+                    showHomeContent()
+                    updateTitle("首页")
                     true
                 }
                 R.id.navigation_history -> {
-                    Toast.makeText(this, "记忆库功能开发中", Toast.LENGTH_SHORT).show()
+                    showHistoryContent()
+                    updateTitle("记忆库")
                     true
                 }
                 R.id.navigation_profile -> {
-                    Toast.makeText(this, "个人中心功能开发中", Toast.LENGTH_SHORT).show()
+                    // 显示个人中心内容
+                    showProfileContent()
+                    updateTitle("我的")
                     true
                 }
                 else -> false
@@ -61,6 +96,65 @@ class SelectDigitalHumanActivity : AppCompatActivity() {
         fabAdd?.setOnClickListener {
             viewModel.onAddClick()
         }
+    }
+    
+    private fun showHomeContent() {
+        // 显示主页内容，隐藏其他内容
+        binding.clContent.visibility = View.VISIBLE
+        binding.fabAdd.visibility = View.VISIBLE
+        binding.fragmentContainer.visibility = View.GONE
+        
+        // 移除现有的Fragment
+        val fragment = supportFragmentManager.findFragmentByTag("profile_fragment")
+        if (fragment != null) {
+            supportFragmentManager.beginTransaction()
+                .remove(fragment)
+                .commit()
+        }
+        
+        // 移除"记忆库"Fragment（如果有）
+        val historyFragment = supportFragmentManager.findFragmentByTag("history_fragment")
+        if (historyFragment != null) {
+            supportFragmentManager.beginTransaction()
+                .remove(historyFragment)
+                .commit()
+        }
+    }
+    
+    private fun showHistoryContent() {
+        // 隐藏主页内容
+        binding.clContent.visibility = View.GONE
+        binding.fabAdd.visibility = View.GONE
+        
+        // 移除个人中心Fragment（如果有）
+        val profileFragment = supportFragmentManager.findFragmentByTag("profile_fragment")
+        if (profileFragment != null) {
+            supportFragmentManager.beginTransaction()
+                .remove(profileFragment)
+                .commit()
+        }
+        
+        // 添加记忆库Fragment提示（实际应添加正确的Fragment）
+        binding.fragmentContainer.visibility = View.VISIBLE
+        Toast.makeText(this, "记忆库功能开发中", Toast.LENGTH_SHORT).show()
+    }
+    
+    private fun showProfileContent() {
+        // 隐藏主页内容
+        binding.clContent.visibility = View.GONE
+        binding.fabAdd.visibility = View.GONE
+        
+        // 添加个人中心Fragment，确保不会重复添加
+        var profileFragment = supportFragmentManager.findFragmentByTag("profile_fragment") as? ProfileFragment
+        
+        if (profileFragment == null) {
+            profileFragment = ProfileFragment.newInstance()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, profileFragment, "profile_fragment")
+                .commit()
+        }
+        
+        binding.fragmentContainer.visibility = View.VISIBLE
     }
 
     private fun setupObservers() {

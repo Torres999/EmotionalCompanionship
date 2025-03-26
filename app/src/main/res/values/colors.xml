@@ -9,9 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     
     <!-- App Colors -->
-    <color name="primary">#2196F3</color>
+    <color name="primary">@color/purple_500</color>
     <color name="primary_dark">#1976D2</color>
-    <color name="primary_variant">#1976D2</color>
+    <color name="primary_variant">@color/purple_700</color>
     <color name="accent">#03A9F4</color>
     
     <!-- Text Colors -->
@@ -24,7 +24,7 @@
     <color name="bottom_nav_unselected">#757575</color>
     
     <!-- App specific colors -->
-    <color name="secondary">#D8BFD8</color>
+    <color name="secondary">@color/teal_200</color>
     
     <!-- 分割线和边框 -->
     <color name="divider">#EEEEEE</color>

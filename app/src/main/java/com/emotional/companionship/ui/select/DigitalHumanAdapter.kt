@@ -1,60 +1,69 @@
 package com.emotional.companionship.ui.select
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.emotional.companionship.R
 import com.emotional.companionship.data.model.DigitalHuman
-import com.emotional.companionship.databinding.ItemDigitalHumanBinding
 
-class DigitalHumanAdapter(
-    private val onItemClick: (DigitalHuman) -> Unit
-) : ListAdapter<DigitalHuman, DigitalHumanAdapter.ViewHolder>(DiffCallback()) {
+class DigitalHumanAdapter(private val onItemClick: (DigitalHuman) -> Unit) :
+    ListAdapter<DigitalHuman, DigitalHumanAdapter.DigitalHumanViewHolder>(DiffCallback) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            ItemDigitalHumanBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DigitalHumanViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_digital_human, parent, false)
+        return DigitalHumanViewHolder(view, onItemClick)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DigitalHumanViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    inner class ViewHolder(
-        private val binding: ItemDigitalHumanBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+    class DigitalHumanViewHolder(
+        itemView: View,
+        private val onItemClick: (DigitalHuman) -> Unit
+    ) : RecyclerView.ViewHolder(itemView) {
+        private val tvName: TextView = itemView.findViewById(R.id.tvName)
+        private val tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
+        private val ivAvatar: ImageView = itemView.findViewById(R.id.ivAvatar)
 
-        init {
-            binding.root.setOnClickListener {
-                val position = layoutPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    onItemClick(getItem(position))
-                }
+        fun bind(digitalHuman: DigitalHuman) {
+            tvName.text = digitalHuman.name
+            tvDescription.text = "上次对话: ${digitalHuman.lastChatTime}"
+            
+            // 简化Glide使用，避免多余的配置
+            try {
+                // 使用try-catch包裹Glide调用，防止崩溃
+                Glide.with(itemView.context)
+                    .load(digitalHuman.avatarUrl.takeIf { !it.isNullOrEmpty() } ?: R.drawable.ic_person)
+                    .error(R.drawable.ic_person)
+                    .into(ivAvatar)
+            } catch (e: Exception) {
+                // 如果Glide加载失败，直接设置默认图片
+                ivAvatar.setImageResource(R.drawable.ic_person)
             }
-        }
-
-        fun bind(item: DigitalHuman) {
-            binding.tvName.text = item.name
-            Glide.with(binding.ivAvatar)
-                .load(item.avatarUrl)
-                .into(binding.ivAvatar)
+            
+            itemView.setOnClickListener {
+                onItemClick(digitalHuman)
+            }
         }
     }
 
-    private class DiffCallback : DiffUtil.ItemCallback<DigitalHuman>() {
-        override fun areItemsTheSame(oldItem: DigitalHuman, newItem: DigitalHuman): Boolean {
-            return oldItem.id == newItem.id
-        }
+    companion object {
+        private val DiffCallback = object : DiffUtil.ItemCallback<DigitalHuman>() {
+            override fun areItemsTheSame(oldItem: DigitalHuman, newItem: DigitalHuman): Boolean {
+                return oldItem.id == newItem.id
+            }
 
-        override fun areContentsTheSame(oldItem: DigitalHuman, newItem: DigitalHuman): Boolean {
-            return oldItem == newItem
+            override fun areContentsTheSame(oldItem: DigitalHuman, newItem: DigitalHuman): Boolean {
+                return oldItem == newItem
+            }
         }
     }
 } 

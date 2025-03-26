@@ -1,5 +1,9 @@
 pluginManagement {
     repositories {
+        maven { url = uri("https://maven.aliyun.com/repository/central") }
+        maven { url = uri("https://maven.aliyun.com/repository/public") }
+        maven { url = uri("https://maven.aliyun.com/nexus/content/groups/public") }
+        maven { url = uri("https://jitpack.io") }
         google()
         mavenCentral()
         gradlePluginPortal()
@@ -7,10 +11,14 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
     repositories {
         google()
         mavenCentral()
+        maven { url = uri("https://maven.aliyun.com/repository/central") }
+        maven { url = uri("https://maven.aliyun.com/repository/public") }
+        maven { url = uri("https://maven.aliyun.com/nexus/content/groups/public") }
+        maven { url = uri("https://jitpack.io") }
     }
 }
 

@@ -1,4 +1,4 @@
-package com.example.emotionalcompanionship.ui.theme
+package com.emotional.companionship.ui.theme
 
 import android.app.Activity
 import android.os.Build

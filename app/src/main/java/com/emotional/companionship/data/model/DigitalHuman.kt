@@ -1,7 +1,9 @@
 package com.emotional.companionship.data.model
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class DigitalHuman(
     val id: String,
     val name: String,
@@ -9,4 +11,4 @@ data class DigitalHuman(
     val personality: String,
     val avatarUrl: String,
     val lastChatTime: String
-) : Serializable 
+) : Parcelable 

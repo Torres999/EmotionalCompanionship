@@ -1,75 +1,65 @@
 package com.emotional.companionship.ui.create
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
 import com.emotional.companionship.data.model.DigitalHuman
-import androidx.databinding.Bindable
-import androidx.databinding.Observable
-import androidx.databinding.PropertyChangeRegistry
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
-class CreateDigitalHumanViewModel @Inject constructor() : ViewModel(), Observable {
-    private val callbacks: PropertyChangeRegistry = PropertyChangeRegistry()
+class CreateDigitalHumanViewModel @Inject constructor() : ViewModel() {
+    private val _name = MutableLiveData<String>()
+    val name: LiveData<String> = _name
 
-    val name = MutableLiveData<String>()
-    val relation = MutableLiveData<String>()
-    val personality = MutableLiveData<String>()
-    val avatarUri = MutableLiveData<String>()
+    private val _relation = MutableLiveData<String>()
+    val relation: LiveData<String> = _relation
 
-    private val _isFormValid = MutableLiveData<Boolean>()
-    val isFormValid: LiveData<Boolean> = _isFormValid
+    private val _personality = MutableLiveData<String>()
+    val personality: LiveData<String> = _personality
 
     private val _navigationEvent = MutableLiveData<NavigationEvent>()
     val navigationEvent: LiveData<NavigationEvent> = _navigationEvent
 
-    @Bindable
-    var isFormValidForBinding: Boolean = false
-        private set
-
-    fun getFormValidForBinding(): Boolean {
-        return isFormValidForBinding
+    fun onNameChanged(name: String) {
+        _name.value = name
     }
 
-    override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback) {
-        callbacks.add(callback)
+    fun onRelationChanged(relation: String) {
+        _relation.value = relation
     }
 
-    override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback) {
-        callbacks.remove(callback)
+    fun onPersonalityChanged(personality: String) {
+        _personality.value = personality
     }
 
-    fun onSelectExistingClick() {
-        _navigationEvent.value = NavigationEvent.NavigateToSelectExisting
-    }
+    fun onCreateClick() {
+        val name = _name.value
+        val relation = _relation.value
+        val personality = _personality.value
 
-    fun onUploadClick() {
-        _navigationEvent.value = NavigationEvent.NavigateToUpload
-    }
+        if (name.isNullOrEmpty() || relation.isNullOrEmpty() || personality.isNullOrEmpty()) {
+            _navigationEvent.value = NavigationEvent.ShowError("请填写所有必填项")
+            return
+        }
 
-    fun onMediaSelected(uri: Uri) {
-        avatarUri.value = uri.toString()
-    }
+        val digitalHuman = DigitalHuman(
+            id = System.currentTimeMillis().toString(),
+            name = name,
+            relation = relation,
+            personality = personality,
+            avatarUrl = "",
+            lastChatTime = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date())
+        )
 
-    fun onExistingDigitalHumanSelected(digitalHuman: DigitalHuman) {
-        name.value = digitalHuman.name
-        relation.value = digitalHuman.relation
-        personality.value = digitalHuman.personality
-        // TODO: Convert avatarUrl to Uri
-    }
-
-    fun onConfirmClick() {
-        // TODO: Save digital human data
-        _navigationEvent.value = NavigationEvent.NavigateToChat
+        _navigationEvent.value = NavigationEvent.NavigateBack(digitalHuman)
     }
 
     sealed class NavigationEvent {
-        object NavigateToSelectExisting : NavigationEvent()
-        object NavigateToUpload : NavigationEvent()
-        object NavigateToChat : NavigationEvent()
+        data class NavigateBack(val digitalHuman: DigitalHuman) : NavigationEvent()
+        data class ShowError(val message: String) : NavigationEvent()
     }
 } 
