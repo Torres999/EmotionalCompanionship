@@ -40,6 +40,11 @@
         <activity
             android:name=".ui.create.SelectExistingDigitalHumanActivity"
             android:exported="false" />
+            
+        <activity
+            android:name=".ui.auth.LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EmotionalCompanionship.NoActionBar" />
 
     </application>
 

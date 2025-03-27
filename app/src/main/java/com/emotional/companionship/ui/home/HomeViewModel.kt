@@ -9,24 +9,44 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor() : ViewModel() {
-    private val _digitalHuman = MutableLiveData<DigitalHuman?>()
-    val digitalHuman: LiveData<DigitalHuman?> = _digitalHuman
-
+    private val _digitalHuman = MutableLiveData<DigitalHuman>()
+    val digitalHuman: LiveData<DigitalHuman> = _digitalHuman
+    
+    private val _digitalHumans = MutableLiveData<List<DigitalHuman>>()
+    val digitalHumans: LiveData<List<DigitalHuman>> = _digitalHumans
+    
     init {
-        // 模拟加载数据
-        loadCurrentDigitalHuman()
+        loadMockData()
     }
-
-    private fun loadCurrentDigitalHuman() {
-        // TODO: 从数据库加载当前选中的数字人
-        // 这里先使用测试数据
-        _digitalHuman.value = DigitalHuman(
-            id = "1",
-            name = "妈妈",
-            avatarUrl = "https://example.com/avatar.jpg",
-            relation = "妈妈",
-            personality = "温柔体贴",
-            lastChatTime = "2小时前"
+    
+    private fun loadMockData() {
+        val mockHumans = listOf(
+            DigitalHuman(
+                id = "1",
+                name = "妈妈",
+                relation = "亲人",
+                personality = "温柔、细心、关爱",
+                avatarUrl = "https://example.com/avatar1.jpg",
+                lastChatTime = "2小时前"
+            ),
+            DigitalHuman(
+                id = "2",
+                name = "爸爸",
+                relation = "亲人",
+                personality = "严厉、勤劳、负责任",
+                avatarUrl = "https://example.com/avatar2.jpg",
+                lastChatTime = "昨天"
+            ),
+            DigitalHuman(
+                id = "3",
+                name = "老师",
+                relation = "导师",
+                personality = "知识渊博、耐心、鼓励",
+                avatarUrl = "https://example.com/avatar3.jpg",
+                lastChatTime = "3天前"
+            )
         )
+        
+        _digitalHumans.value = mockHumans
     }
 } 

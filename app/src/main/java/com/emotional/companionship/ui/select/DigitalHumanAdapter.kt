@@ -30,12 +30,12 @@ class DigitalHumanAdapter(private val onItemClick: (DigitalHuman) -> Unit) :
         private val onItemClick: (DigitalHuman) -> Unit
     ) : RecyclerView.ViewHolder(itemView) {
         private val tvName: TextView = itemView.findViewById(R.id.tvName)
-        private val tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
+        private val tvLastChat: TextView = itemView.findViewById(R.id.tvLastChat)
         private val ivAvatar: ImageView = itemView.findViewById(R.id.ivAvatar)
 
         fun bind(digitalHuman: DigitalHuman) {
             tvName.text = digitalHuman.name
-            tvDescription.text = "上次对话: ${digitalHuman.lastChatTime}"
+            tvLastChat.text = "上次对话: ${digitalHuman.lastChatTime}"
             
             // 简化Glide使用，避免多余的配置
             try {
