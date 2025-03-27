@@ -1,46 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
     
-    <!-- AI科技圆环 -->
-    <path
-        android:fillColor="#4169E1"
-        android:pathData="M54,28C39.64,28 28,39.64 28,54C28,68.36 39.64,80 54,80C68.36,80 80,68.36 80,54C80,39.64 68.36,28 54,28ZM54,76C41.85,76 32,66.15 32,54C32,41.85 41.85,32 54,32C66.15,32 76,41.85 76,54C76,66.15 66.15,76 54,76Z"
-        android:fillAlpha="0.8"/>
-
-    <!-- 心形图案 -->
-    <path
-        android:fillColor="#4169E1"
-        android:pathData="M54,44C57.5,36 66.5,36 70,42C73.5,48 70,54 54,66C38,54 34.5,48 38,42C41.5,36 50.5,36 54,44Z"
-        android:fillAlpha="0.9"/>
-
-    <!-- 科技连接点 -->
-    <path
-        android:fillColor="#4169E1"
-        android:pathData="M54,52m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"
-        android:fillAlpha="0.9"/>
-    <path
-        android:fillColor="#4169E1"
-        android:pathData="M46,54m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"
-        android:fillAlpha="0.9"/>
-    <path
-        android:fillColor="#4169E1"
-        android:pathData="M62,54m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"
-        android:fillAlpha="0.9"/>
-
-    <!-- 连接线 -->
-    <path
-        android:strokeColor="#4169E1"
-        android:strokeWidth="1.5"
-        android:strokeAlpha="0.6"
-        android:pathData="M48,54L60,54"/>
-    <path
-        android:strokeColor="#4169E1"
-        android:strokeWidth="1.5"
-        android:strokeAlpha="0.6"
-        android:pathData="M54,52L54,56"/>
+    <group
+        android:scaleX="1.8"
+        android:scaleY="1.8"
+        android:translateX="32"
+        android:translateY="32">
+        <!-- 蜜蜂身体主体（黄色部分）-->
+        <path
+            android:fillColor="#F5CB44"
+            android:pathData="M12,6C8,6 6,9 6,12C6,15 8,18 12,18C16,18 18,15 18,12C18,9 16,6 12,6Z" />
+            
+        <!-- 黑色条纹 -->
+        <path
+            android:fillColor="#000000"
+            android:pathData="M8.5,7.5C8.5,7.5 8.5,10 8.5,12C8.5,14 9.5,16.5, 12,16.5C14.5,16.5 15.5,14 15.5,12C15.5,10 15.5,7.5 15.5,7.5C13.5,6 10.5,6 8.5,7.5Z" />
+            
+        <!-- 第一条黄色条纹 -->
+        <path
+            android:fillColor="#F5CB44"
+            android:pathData="M9,8.5L15,8.5A0.5,0.5 0,0 1,15.5 9L15.5,9.5A0.5,0.5 0,0 1,15 10L9,10A0.5,0.5 0,0 1,8.5 9.5L8.5,9A0.5,0.5 0,0 1,9 8.5z"/>
+            
+        <!-- 第二条黄色条纹 -->
+        <path
+            android:fillColor="#F5CB44"
+            android:pathData="M9,11L15,11A0.5,0.5 0,0 1,15.5 11.5L15.5,12A0.5,0.5 0,0 1,15 12.5L9,12.5A0.5,0.5 0,0 1,8.5 12L8.5,11.5A0.5,0.5 0,0 1,9 11z"/>
+            
+        <!-- 第三条黄色条纹 -->
+        <path
+            android:fillColor="#F5CB44"
+            android:pathData="M9,13.5L15,13.5A0.5,0.5 0,0 1,15.5 14L15.5,14.5A0.5,0.5 0,0 1,15 15L9,15A0.5,0.5 0,0 1,8.5 14.5L8.5,14A0.5,0.5 0,0 1,9 13.5z"/>
+        
+        <!-- 左翅膀 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:strokeColor="#000000"
+            android:strokeWidth="0.3"
+            android:pathData="M7,9.5C7,9.5 4,8 5,5C8,7 7,9.5 7,9.5Z" />
+            
+        <!-- 右翅膀 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:strokeColor="#000000"
+            android:strokeWidth="0.3"
+            android:pathData="M17,9.5C17,9.5 20,8 19,5C16,7 17,9.5 17,9.5Z" />
+        
+        <!-- 左触角 -->
+        <path
+            android:strokeColor="#000000"
+            android:strokeWidth="0.6"
+            android:pathData="M9.5,7.5C9.5,7.5 8.5,5.5 7.5,5" />
+            
+        <!-- 右触角 -->
+        <path
+            android:strokeColor="#000000"
+            android:strokeWidth="0.6"
+            android:pathData="M14.5,7.5C14.5,7.5 15.5,5.5 16.5,5" />
+        
+        <!-- 左眼睛 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M10,10m-0.8,0a0.8,0.8 0,1 1,1.6 0a0.8,0.8 0,1 1,-1.6 0" />
+            
+        <!-- 右眼睛 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M14,10m-0.8,0a0.8,0.8 0,1 1,1.6 0a0.8,0.8 0,1 1,-1.6 0" />
+        
+        <!-- 微笑的嘴巴 -->
+        <path
+            android:strokeColor="#000000"
+            android:strokeWidth="0.5"
+            android:pathData="M11,12C11.5,12.5 12.5,12.5 13,12" />
+    </group>
 </vector>

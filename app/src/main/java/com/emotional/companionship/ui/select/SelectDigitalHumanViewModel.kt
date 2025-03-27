@@ -21,16 +21,16 @@ class SelectDigitalHumanViewModel : ViewModel() {
         _digitalHumans.value = listOf(
             DigitalHuman(
                 id = "1",
-                name = "妈妈",
-                relation = "母亲",
+                name = "女儿",
+                relation = "女儿",
                 personality = "温柔体贴，善解人意",
                 avatarUrl = "",
                 lastChatTime = "2025-03-24 10:30"
             ),
             DigitalHuman(
                 id = "2",
-                name = "爸爸",
-                relation = "父亲",
+                name = "儿子",
+                relation = "儿子",
                 personality = "严厉认真，不苟言笑",
                 avatarUrl = "",
                 lastChatTime = "2025-03-23 18:15"
