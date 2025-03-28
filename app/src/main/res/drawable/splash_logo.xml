@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 圆形黄色背景 -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/yellow_primary" />
+            <size android:width="120dp" android:height="120dp" />
+        </shape>
+    </item>
+    
+    <!-- 蜜蜂图标 - 不使用ic_launcher_foreground，而是直接定义蜜蜂 -->
+    <item 
+        android:width="85dp" 
+        android:height="85dp" 
+        android:gravity="center">
+        <vector
+            android:width="24dp"
+            android:height="24dp"
+            android:viewportWidth="24"
+            android:viewportHeight="24">
+            
+            <!-- 蜜蜂身体主体（黄色部分）-->
+            <path
+                android:fillColor="#F5CB44"
+                android:pathData="M12,6C8,6 6,9 6,12C6,15 8,18 12,18C16,18 18,15 18,12C18,9 16,6 12,6Z" />
+            
+            <!-- 黑色条纹 -->
+            <path
+                android:fillColor="#000000"
+                android:pathData="M8.5,7.5C8.5,7.5 8.5,10 8.5,12C8.5,14 9.5,16.5, 12,16.5C14.5,16.5 15.5,14 15.5,12C15.5,10 15.5,7.5 15.5,7.5C13.5,6 10.5,6 8.5,7.5Z" />
+                
+            <!-- 第一条黄色条纹 -->
+            <path
+                android:fillColor="#F5CB44"
+                android:pathData="M9,8.5L15,8.5A0.5,0.5 0,0 1,15.5 9L15.5,9.5A0.5,0.5 0,0 1,15 10L9,10A0.5,0.5 0,0 1,8.5 9.5L8.5,9A0.5,0.5 0,0 1,9 8.5z"/>
+                
+            <!-- 第二条黄色条纹 -->
+            <path
+                android:fillColor="#F5CB44"
+                android:pathData="M9,11L15,11A0.5,0.5 0,0 1,15.5 11.5L15.5,12A0.5,0.5 0,0 1,15 12.5L9,12.5A0.5,0.5 0,0 1,8.5 12L8.5,11.5A0.5,0.5 0,0 1,9 11z"/>
+                
+            <!-- 第三条黄色条纹 -->
+            <path
+                android:fillColor="#F5CB44"
+                android:pathData="M9,13.5L15,13.5A0.5,0.5 0,0 1,15.5 14L15.5,14.5A0.5,0.5 0,0 1,15 15L9,15A0.5,0.5 0,0 1,8.5 14.5L8.5,14A0.5,0.5 0,0 1,9 13.5z"/>
+            
+            <!-- 左翅膀 -->
+            <path
+                android:fillColor="#FFFFFF"
+                android:strokeColor="#000000"
+                android:strokeWidth="0.3"
+                android:pathData="M7,9.5C7,9.5 4,8 5,5C8,7 7,9.5 7,9.5Z" />
+                
+            <!-- 右翅膀 -->
+            <path
+                android:fillColor="#FFFFFF"
+                android:strokeColor="#000000"
+                android:strokeWidth="0.3"
+                android:pathData="M17,9.5C17,9.5 20,8 19,5C16,7 17,9.5 17,9.5Z" />
+            
+            <!-- 左触角 -->
+            <path
+                android:strokeColor="#000000"
+                android:strokeWidth="0.6"
+                android:pathData="M9.5,7.5C9.5,7.5 8.5,5.5 7.5,5" />
+                
+            <!-- 右触角 -->
+            <path
+                android:strokeColor="#000000"
+                android:strokeWidth="0.6"
+                android:pathData="M14.5,7.5C14.5,7.5 15.5,5.5 16.5,5" />
+            
+            <!-- 左眼睛 -->
+            <path
+                android:fillColor="#FFFFFF"
+                android:pathData="M10,10m-0.8,0a0.8,0.8 0,1 1,1.6 0a0.8,0.8 0,1 1,-1.6 0" />
+                
+            <!-- 右眼睛 -->
+            <path
+                android:fillColor="#FFFFFF"
+                android:pathData="M14,10m-0.8,0a0.8,0.8 0,1 1,1.6 0a0.8,0.8 0,1 1,-1.6 0" />
+            
+            <!-- 微笑的嘴巴 -->
+            <path
+                android:strokeColor="#000000"
+                android:strokeWidth="0.5"
+                android:pathData="M11,12C11.5,12.5 12.5,12.5 13,12" />
+        </vector>
+    </item>
+</layer-list> 

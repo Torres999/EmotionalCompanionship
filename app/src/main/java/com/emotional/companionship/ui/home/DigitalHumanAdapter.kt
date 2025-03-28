@@ -28,6 +28,13 @@ class DigitalHumanAdapter(
         val item = getItem(position)
         holder.bind(item)
         
+        // 为第一个项目设置特殊的边距
+        if (position == 0) {
+            val params = holder.itemView.layoutParams as RecyclerView.LayoutParams
+            params.topMargin = -36 // 使用更大的负外边距使第一个项目更靠近顶部
+            holder.itemView.layoutParams = params
+        }
+        
         // 仅设置按钮点击监听
         holder.btnStartChat.setOnClickListener {
             Log.d("DigitalHumanAdapter", "Button clicked for: ${item.name}")

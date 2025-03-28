@@ -6,10 +6,10 @@
     android:viewportHeight="108">
     
     <group
-        android:scaleX="1.8"
-        android:scaleY="1.8"
-        android:translateX="32"
-        android:translateY="32">
+        android:scaleX="2.85"
+        android:scaleY="2.85"
+        android:translateX="18"
+        android:translateY="24">
         <!-- 蜜蜂身体主体（黄色部分）-->
         <path
             android:fillColor="#F5CB44"

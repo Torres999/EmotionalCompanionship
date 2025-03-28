@@ -3,7 +3,7 @@ package com.emotional.companionship.ui.home
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -28,13 +28,19 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp, vertical = 16.dp),
+                .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            items(digitalHumans) { digitalHuman ->
+            itemsIndexed(digitalHumans) { index, digitalHuman ->
                 Card(
-                    modifier = Modifier
-                        .fillMaxWidth(),
+                    modifier = if (index == 0) {
+                        // 第一个卡片使用负的顶部外边距，使其更靠近顶部
+                        Modifier
+                            .fillMaxWidth()
+                            .offset(y = (-24).dp)
+                    } else {
+                        Modifier.fillMaxWidth()
+                    },
                     shape = RoundedCornerShape(12.dp),
                     elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                     colors = CardDefaults.cardColors(containerColor = Color.White)
