@@ -6,20 +6,6 @@
     android:layout_height="match_parent"
     android:background="#F5F5F5">
 
-    <!-- 页面标题 -->
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:gravity="center"
-        android:paddingVertical="16dp"
-        android:text="个人中心"
-        android:textColor="#333333"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <!-- 用户信息卡片 -->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_user_info"
@@ -29,7 +15,7 @@
         android:layout_marginTop="16dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="0dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_title">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"

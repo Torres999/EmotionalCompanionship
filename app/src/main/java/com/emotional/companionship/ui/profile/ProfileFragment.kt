@@ -33,9 +33,6 @@ class ProfileFragment : Fragment() {
         setupViews()
         observeViewModel()
         
-        // 隐藏标题文本，让Activity的ActionBar显示标题
-        binding.tvTitle.visibility = View.GONE
-        
         // 直接设置默认头像，避免Glide初始化问题
         binding.ivAvatar.setImageResource(R.drawable.ic_person)
     }

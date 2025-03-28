@@ -25,7 +25,7 @@
     
     <!-- Bottom Navigation -->
     <color name="bottom_nav_selected">@color/yellow_primary</color>
-    <color name="bottom_nav_unselected">@color/gray</color>
+    <color name="bottom_nav_unselected">@color/black</color>
     
     <!-- App specific colors -->
     <color name="secondary">@color/yellow_light</color>
