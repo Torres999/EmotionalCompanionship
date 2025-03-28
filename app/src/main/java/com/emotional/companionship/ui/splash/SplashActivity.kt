@@ -3,6 +3,7 @@ package com.emotional.companionship.ui.splash
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.emotional.companionship.R
 import com.emotional.companionship.databinding.ActivitySplashBinding
 import com.emotional.companionship.ui.select.SelectDigitalHumanActivity
@@ -16,8 +17,9 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
-        // 移除按钮点击事件设置，直接调用导航方法
-        // setupViews()
+        // 设置状态栏颜色为标题栏背景色
+        window.statusBarColor = ContextCompat.getColor(this, R.color.top_bar_color)
+        
         // 自动跳转到SelectDigitalHumanActivity
         navigateToMainScreen()
         setupObservers()

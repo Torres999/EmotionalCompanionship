@@ -8,7 +8,7 @@
     <group
         android:scaleX="2.85"
         android:scaleY="2.85"
-        android:translateX="18"
+        android:translateX="19.6"
         android:translateY="24">
         <!-- 蜜蜂身体主体（黄色部分）-->
         <path

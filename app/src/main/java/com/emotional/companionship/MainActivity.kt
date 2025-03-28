@@ -13,11 +13,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -30,8 +30,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // 设置状态栏颜色
-        window.statusBarColor = Color(0xFFE94335).toArgb()
+        // 设置状态栏颜色为顶部标题栏背景色
+        window.statusBarColor = ContextCompat.getColor(this, R.color.top_bar_color)
+        
+        // 告诉系统UI，内容不应该覆盖系统栏
+        WindowCompat.setDecorFitsSystemWindows(window, true)
+        
         // 设置状态栏文字/图标为白色
         WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars = false
         
@@ -58,6 +62,8 @@ fun MainScreen() {
         else -> "首页"
     }
     
+    val topBarColor = Color(0xFFE94335) // 顶部标题栏背景色
+    
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -72,11 +78,10 @@ fun MainScreen() {
                     ) 
                 },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = Color(0xFFE94335),
+                    containerColor = topBarColor,
                     titleContentColor = Color.White
                 ),
-                modifier = Modifier.height(48.dp),
-                windowInsets = WindowInsets(0, 0, 0, 0)
+                modifier = Modifier.height(48.dp)
             )
         },
         bottomBar = {

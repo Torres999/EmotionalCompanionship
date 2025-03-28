@@ -32,9 +32,8 @@ class SelectDigitalHumanActivity : AppCompatActivity() {
         binding = ActivitySelectDigitalHumanBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
-        // 设置状态栏
-        window.statusBarColor = ContextCompat.getColor(this, android.R.color.transparent)
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        // 设置状态栏颜色为标题栏背景色
+        window.statusBarColor = ContextCompat.getColor(this, R.color.top_bar_color)
         
         setupToolbar()
         setupViews()

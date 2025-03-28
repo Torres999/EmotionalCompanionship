@@ -28,21 +28,22 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 16.dp),
+                .padding(horizontal = 16.dp, vertical = 0.dp),
+            contentPadding = PaddingValues(bottom = 16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             itemsIndexed(digitalHumans) { index, digitalHuman ->
                 Card(
                     modifier = if (index == 0) {
-                        // 第一个卡片使用负的顶部外边距，使其更靠近顶部
+                        // 第一个卡片使用负的顶部外边距，使其更靠近顶部，完全与背景元素顶部对齐
                         Modifier
                             .fillMaxWidth()
-                            .offset(y = (-24).dp)
+                            .offset(y = (-32).dp)
                     } else {
                         Modifier.fillMaxWidth()
                     },
                     shape = RoundedCornerShape(12.dp),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
                     colors = CardDefaults.cardColors(containerColor = Color.White)
                 ) {
                     Column(

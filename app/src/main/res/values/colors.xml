@@ -12,6 +12,9 @@
     <color name="yellow_dark">#E1B41E</color>
     <color name="yellow_light">#FFDE77</color>
     
+    <!-- 顶部标题背景色 -->
+    <color name="top_bar_color">#FFFFFFFF</color>
+    
     <!-- App Colors -->
     <color name="primary">@color/yellow_primary</color>
     <color name="primary_dark">@color/yellow_dark</color>
