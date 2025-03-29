@@ -57,7 +57,7 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- 第一个卡片：账号设置和充值 -->
+    <!-- 第一个卡片：账号设置和通知设置 -->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_account"
         android:layout_width="match_parent"
@@ -84,76 +84,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="账号设置"
-                android:textColor="#333333"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_arrow_right" />
-        </LinearLayout>
-
-        <!-- 分隔线 -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="56dp"
-            android:background="#F0F0F0" />
-
-        <!-- 充值 -->
-        <LinearLayout
-            android:id="@+id/ll_recharge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="57dp"
-            android:background="@android:color/white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="16dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="充值"
-                android:textColor="#333333"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_arrow_right" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- 第二个卡片：隐私设置和通知设置 -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_settings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        app:layout_constraintTop_toBottomOf="@id/card_account">
-
-        <!-- 隐私设置 -->
-        <LinearLayout
-            android:id="@+id/ll_privacy_settings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="16dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="隐私设置"
                 android:textColor="#333333"
                 android:textSize="16sp" />
 
@@ -197,22 +127,92 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- 第三个卡片：关于我们 -->
+    <!-- 第二个卡片：充值 -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_about"
+        android:id="@+id/card_recharge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="4dp"
-        app:layout_constraintTop_toBottomOf="@id/card_settings">
+        app:layout_constraintTop_toBottomOf="@id/card_account">
+
+        <!-- 充值 -->
+        <LinearLayout
+            android:id="@+id/ll_recharge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="充值"
+                android:textColor="#333333"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_right" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- 第三个卡片：隐私设置和关于我们 -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_privacy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:layout_constraintTop_toBottomOf="@id/card_recharge">
+
+        <!-- 隐私设置 -->
+        <LinearLayout
+            android:id="@+id/ll_privacy_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="隐私设置"
+                android:textColor="#333333"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_right" />
+        </LinearLayout>
+
+        <!-- 分隔线 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="56dp"
+            android:background="#F0F0F0" />
 
         <!-- 关于我们 -->
         <LinearLayout
             android:id="@+id/ll_about_us"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="57dp"
             android:background="@android:color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
