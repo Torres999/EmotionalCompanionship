@@ -42,6 +42,10 @@ class ProfileFragment : Fragment() {
         binding.llAccountSettings.setOnClickListener {
             Toast.makeText(requireContext(), "账号设置", Toast.LENGTH_SHORT).show()
         }
+        
+        binding.llRecharge.setOnClickListener {
+            Toast.makeText(requireContext(), "充值", Toast.LENGTH_SHORT).show()
+        }
 
         binding.llPrivacySettings.setOnClickListener {
             Toast.makeText(requireContext(), "隐私设置", Toast.LENGTH_SHORT).show()

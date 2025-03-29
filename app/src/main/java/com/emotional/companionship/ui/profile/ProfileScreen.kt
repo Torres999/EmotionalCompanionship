@@ -77,11 +77,11 @@ fun ProfileScreen() {
             }
         }
 
-        // 设置项列表
+        // 第一个卡片：账号设置和充值
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = 16.dp, vertical = 8.dp),
             shape = RoundedCornerShape(12.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
@@ -94,6 +94,23 @@ fun ProfileScreen() {
 
                 Divider(color = Color(0xFFF0F0F0), thickness = 1.dp)
 
+                // 充值
+                SettingItem(title = "充值") {
+                    // 点击事件
+                }
+            }
+        }
+
+        // 第二个卡片：隐私设置和通知设置
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            shape = RoundedCornerShape(12.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        ) {
+            Column {
                 // 隐私设置
                 SettingItem(title = "隐私设置") {
                     // 点击事件
@@ -105,13 +122,21 @@ fun ProfileScreen() {
                 SettingItem(title = "通知设置") {
                     // 点击事件
                 }
+            }
+        }
 
-                Divider(color = Color(0xFFF0F0F0), thickness = 1.dp)
-
-                // 关于我们
-                SettingItem(title = "关于我们") {
-                    // 点击事件
-                }
+        // 第三个卡片：关于我们
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            shape = RoundedCornerShape(12.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        ) {
+            // 关于我们
+            SettingItem(title = "关于我们") {
+                // 点击事件
             }
         }
     }
