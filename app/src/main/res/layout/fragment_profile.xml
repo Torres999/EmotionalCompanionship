@@ -14,7 +14,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
         app:cardCornerRadius="12dp"
-        app:cardElevation="0dp"
+        app:cardElevation="4dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -65,7 +65,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
         app:cardCornerRadius="12dp"
-        app:cardElevation="0dp"
+        app:cardElevation="4dp"
         app:layout_constraintTop_toBottomOf="@id/card_user_info">
 
         <!-- 账号设置 -->
