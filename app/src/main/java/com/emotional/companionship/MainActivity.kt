@@ -25,6 +25,7 @@ import androidx.navigation.compose.rememberNavController
 import com.emotional.companionship.ui.navigation.AppNavigation
 import com.emotional.companionship.ui.navigation.Screen
 import com.emotional.companionship.ui.theme.EmotionalCompanionshipTheme
+import androidx.compose.ui.platform.LocalContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +63,7 @@ fun MainScreen() {
         else -> "首页"
     }
     
-    val topBarColor = Color(0xFFE94335) // 顶部标题栏背景色
+    val topBarColor = Color(ContextCompat.getColor(LocalContext.current, R.color.top_bar_color).toInt()) // 使用colors.xml中的颜色
     
     Scaffold(
         topBar = {
@@ -108,10 +109,10 @@ fun MainScreen() {
                         icon = { Icon(icon, contentDescription = label) },
                         label = { Text(label) },
                         colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = Color(0xFFF5CB44),
-                            selectedTextColor = Color(0xFFF5CB44),
-                            unselectedIconColor = Color.Black,
-                            unselectedTextColor = Color.Black
+                            selectedIconColor = Color(ContextCompat.getColor(LocalContext.current, R.color.bottom_nav_selected).toInt()),
+                            selectedTextColor = Color(ContextCompat.getColor(LocalContext.current, R.color.bottom_nav_selected).toInt()),
+                            unselectedIconColor = Color(ContextCompat.getColor(LocalContext.current, R.color.bottom_nav_unselected).toInt()),
+                            unselectedTextColor = Color(ContextCompat.getColor(LocalContext.current, R.color.bottom_nav_unselected).toInt())
                         )
                     )
                 }

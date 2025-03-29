@@ -7,7 +7,7 @@
     <color name="gray">#757575</color>
     <color name="gray_dark">#212121</color>
     
-    <!-- 黄色主题色 -->
+    <!-- 主题色 -->
     <color name="yellow_primary">#F5CB44</color>
     <color name="yellow_dark">#E1B41E</color>
     <color name="yellow_light">#FFDE77</color>
@@ -17,22 +17,16 @@
     
     <!-- App Colors -->
     <color name="primary">@color/yellow_primary</color>
-    <color name="primary_dark">@color/yellow_dark</color>
     <color name="primary_variant">@color/yellow_dark</color>
-    <color name="accent">@color/yellow_primary</color>
     
     <!-- Text Colors -->
     <color name="text_primary">@color/gray_dark</color>
     <color name="text_secondary">@color/gray</color>
-    <color name="text_hint">@color/gray_light</color>
     
     <!-- Bottom Navigation -->
     <color name="bottom_nav_selected">@color/yellow_primary</color>
     <color name="bottom_nav_unselected">@color/black</color>
     
-    <!-- App specific colors -->
-    <color name="secondary">@color/yellow_light</color>
-    
-    <!-- 分割线和边框 -->
+    <!-- 分割线 -->
     <color name="divider">@color/gray_light</color>
 </resources>

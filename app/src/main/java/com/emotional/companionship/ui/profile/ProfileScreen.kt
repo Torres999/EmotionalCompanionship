@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,14 +18,22 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import com.emotional.companionship.R
 
 @Composable
 fun ProfileScreen() {
+    val context = LocalContext.current
+    val backgroundColor = Color(ContextCompat.getColor(context, R.color.gray_light))
+    val cardColor = Color(ContextCompat.getColor(context, R.color.white))
+    val textPrimaryColor = Color(ContextCompat.getColor(context, R.color.text_primary))
+    val textSecondaryColor = Color(ContextCompat.getColor(context, R.color.text_secondary))
+    val dividerColor = Color(ContextCompat.getColor(context, R.color.divider))
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF5F5F5))
+            .background(backgroundColor)
     ) {
         // 用户信息卡片
         Card(
@@ -33,7 +41,7 @@ fun ProfileScreen() {
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 16.dp),
             shape = RoundedCornerShape(12.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
+            colors = CardDefaults.cardColors(containerColor = cardColor),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
             Row(
@@ -53,7 +61,7 @@ fun ProfileScreen() {
                         painter = painterResource(id = R.drawable.ic_person),
                         contentDescription = "用户头像",
                         modifier = Modifier.fillMaxSize(),
-                        tint = Color.White
+                        tint = cardColor
                     )
                 }
 
@@ -65,13 +73,13 @@ fun ProfileScreen() {
                         text = "用户名",
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color(0xFF333333)
+                        color = textPrimaryColor
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = "ID: 888888",
                         fontSize = 14.sp,
-                        color = Color(0xFF999999)
+                        color = textSecondaryColor
                     )
                 }
             }
@@ -83,19 +91,19 @@ fun ProfileScreen() {
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             shape = RoundedCornerShape(12.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
+            colors = CardDefaults.cardColors(containerColor = cardColor),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
             Column {
                 // 账号设置
-                SettingItem(title = "账号设置") {
+                SettingItem(title = "账号设置", textPrimaryColor) {
                     // 点击事件
                 }
 
-                Divider(color = Color(0xFFF0F0F0), thickness = 1.dp)
+                HorizontalDivider(color = dividerColor, thickness = 1.dp)
 
                 // 通知设置
-                SettingItem(title = "通知设置") {
+                SettingItem(title = "通知设置", textPrimaryColor) {
                     // 点击事件
                 }
             }
@@ -107,11 +115,11 @@ fun ProfileScreen() {
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             shape = RoundedCornerShape(12.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
+            colors = CardDefaults.cardColors(containerColor = cardColor),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
             // 充值
-            SettingItem(title = "充值") {
+            SettingItem(title = "充值", textPrimaryColor) {
                 // 点击事件
             }
         }
@@ -122,19 +130,19 @@ fun ProfileScreen() {
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             shape = RoundedCornerShape(12.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
+            colors = CardDefaults.cardColors(containerColor = cardColor),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
             Column {
                 // 隐私设置
-                SettingItem(title = "隐私设置") {
+                SettingItem(title = "隐私设置", textPrimaryColor) {
                     // 点击事件
                 }
 
-                Divider(color = Color(0xFFF0F0F0), thickness = 1.dp)
+                HorizontalDivider(color = dividerColor, thickness = 1.dp)
 
                 // 关于我们
-                SettingItem(title = "关于我们") {
+                SettingItem(title = "关于我们", textPrimaryColor) {
                     // 点击事件
                 }
             }
@@ -143,7 +151,10 @@ fun ProfileScreen() {
 }
 
 @Composable
-fun SettingItem(title: String, onClick: () -> Unit) {
+fun SettingItem(title: String, textColor: Color, onClick: () -> Unit) {
+    val context = LocalContext.current
+    val grayColor = Color(ContextCompat.getColor(context, R.color.gray))
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -155,12 +166,12 @@ fun SettingItem(title: String, onClick: () -> Unit) {
         Text(
             text = title,
             fontSize = 16.sp,
-            color = Color(0xFF333333)
+            color = textColor
         )
         Icon(
-            imageVector = Icons.Default.KeyboardArrowRight,
+            imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
             contentDescription = "进入",
-            tint = Color.Gray,
+            tint = grayColor,
             modifier = Modifier.size(24.dp)
         )
     }
