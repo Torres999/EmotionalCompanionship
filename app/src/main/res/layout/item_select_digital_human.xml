@@ -7,7 +7,7 @@
     android:layout_margin="4dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="0dp"
-    app:strokeColor="#EEEEEE"
+    app:strokeColor="@color/gray_light"
     app:strokeWidth="1dp">
 
     <ImageView

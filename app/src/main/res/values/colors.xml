@@ -4,29 +4,35 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray_light">#EEEEEE</color>
-    <color name="gray">#757575</color>
     <color name="gray_dark">#212121</color>
-    
+    <color name="gray">#F5F5F5</color>
+
     <!-- 主题色 -->
     <color name="yellow_primary">#F5CB44</color>
     <color name="yellow_dark">#E1B41E</color>
     <color name="yellow_light">#FFDE77</color>
-    
-    <!-- 顶部标题背景色 -->
-    <color name="top_bar_color">#FFFFFFFF</color>
-    
-    <!-- App Colors -->
-    <color name="primary">@color/yellow_primary</color>
-    <color name="primary_variant">@color/yellow_dark</color>
-    
-    <!-- Text Colors -->
-    <color name="text_primary">@color/gray_dark</color>
-    <color name="text_secondary">@color/gray</color>
-    
-    <!-- Bottom Navigation -->
-    <color name="bottom_nav_selected">@color/yellow_primary</color>
-    <color name="bottom_nav_unselected">@color/black</color>
+
+    <!-- 背景色 -->
+    <color name="background_light">#F5F7FA</color>
+
+    <!-- 文本颜色 -->
+    <color name="text_title">#333333</color>
+    <color name="text_content">#666666</color>
+    <color name="text_hint">#999999</color>
     
     <!-- 分割线 -->
-    <color name="divider">@color/gray_light</color>
+    <color name="divider">#E0E0E0</color>
+    
+    <!-- 功能性别名 -->
+    <color name="top_bar_color">@color/white</color>
+    <color name="primary">@color/yellow_primary</color>
+    <color name="primary_variant">@color/yellow_dark</color>
+    <color name="text_primary">@color/gray_dark</color>
+    <color name="bottom_nav_selected">@color/yellow_primary</color>
+    <color name="bottom_nav_unselected">@color/black</color>
+
+    <!-- 功能特定颜色 -->
+    <color name="green">#4CAF50</color>
+    <color name="wechat_green">@color/green</color>
+
 </resources>

@@ -67,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:textColor="@color/text_secondary"
+                    android:textColor="@color/text_hint"
                     android:textSize="12sp"
                     android:clickable="false"
                     android:focusable="false"
@@ -79,7 +79,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#E0E0E0"
+            android:background="@color/divider"
             android:clickable="false"
             android:focusable="false"/>
 
@@ -90,7 +90,7 @@
             android:layout_height="48dp"
             android:layout_margin="16dp"
             android:text="开始视频对话"
-            android:textColor="#000000"
+            android:textColor="@color/black"
             android:textSize="16sp"
             android:background="@drawable/bg_gradient_button"
             android:foreground="?attr/selectableItemBackground"

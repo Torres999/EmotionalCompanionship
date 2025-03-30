@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/background_light">
 
     <ImageView
         android:id="@+id/ivBack"
@@ -51,7 +51,7 @@
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
-                app:strokeColor="#EEEEEE"
+                app:strokeColor="@color/gray_light"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -90,7 +90,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:text="从已有数字人中选择一个作为模板"
-                                android:textColor="@color/text_secondary"
+                                android:textColor="@color/text_hint"
                                 android:textSize="14sp" />
 
                         </LinearLayout>
@@ -108,7 +108,7 @@
                 android:layout_marginBottom="24dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
-                app:strokeColor="#EEEEEE"
+                app:strokeColor="@color/gray_light"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -128,7 +128,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="上传照片或视频"
-                        android:textColor="@color/text_secondary"
+                        android:textColor="@color/text_hint"
                         android:textSize="14sp" />
 
                 </LinearLayout>
