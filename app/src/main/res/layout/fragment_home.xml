@@ -21,15 +21,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_digital_human" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddDigitalHuman"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:src="@android:drawable/ic_input_add"
-        android:backgroundTint="@color/divider"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="创建数字人" />
-
 </androidx.constraintlayout.widget.ConstraintLayout> 

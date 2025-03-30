@@ -93,18 +93,11 @@ class SelectDigitalHumanActivity : AppCompatActivity() {
         
         // 默认选中首页
         binding.bottomNavigation.selectedItemId = R.id.navigation_home
-        
-        // 添加FAB点击事件
-        val fabAdd = findViewById<FloatingActionButton>(R.id.fabAdd)
-        fabAdd?.setOnClickListener {
-            viewModel.onAddClick()
-        }
     }
     
     private fun showHomeContent() {
         // 显示主页内容，隐藏其他内容
         binding.clContent.visibility = View.VISIBLE
-        binding.fabAdd.visibility = View.VISIBLE
         binding.fragmentContainer.visibility = View.GONE
         
         // 移除现有的Fragment
@@ -127,7 +120,6 @@ class SelectDigitalHumanActivity : AppCompatActivity() {
     private fun showHistoryContent() {
         // 隐藏主页内容
         binding.clContent.visibility = View.GONE
-        binding.fabAdd.visibility = View.GONE
         
         // 移除个人中心Fragment（如果有）
         val profileFragment = supportFragmentManager.findFragmentByTag("profile_fragment")
@@ -153,7 +145,6 @@ class SelectDigitalHumanActivity : AppCompatActivity() {
     private fun showProfileContent() {
         // 隐藏主页内容
         binding.clContent.visibility = View.GONE
-        binding.fabAdd.visibility = View.GONE
         
         // 添加个人中心Fragment，确保不会重复添加
         var profileFragment = supportFragmentManager.findFragmentByTag("profile_fragment") as? ProfileFragment
@@ -190,5 +181,10 @@ class SelectDigitalHumanActivity : AppCompatActivity() {
         fun start(context: Context) {
             context.startActivity(Intent(context, SelectDigitalHumanActivity::class.java))
         }
+    }
+    
+    // 添加这个方法，供适配器调用以添加新的数字人
+    fun showAddDigitalHuman() {
+        viewModel.onAddClick()
     }
 } 
