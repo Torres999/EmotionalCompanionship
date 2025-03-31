@@ -8,6 +8,7 @@
 
 - **基础URL**: `https://api.emotionalcompanionship.com/v1`
 - **接口调用说明**: 除了特别标明的接口外，大部分接口需要用户登录后才能调用
+- **认证方式**: 需要认证的接口在请求头（headers）中添加 `Authorization: Bearer {token}` 来进行认证
 - **错误码说明**: 所有接口都可能返回以下错误码:
   - 200: 成功
   - 400: 请求参数错误
@@ -54,7 +55,7 @@ POST /auth/login/wechat
 }
 ```
 
-**备注**: 这个接口不需要登录即可访问。登录成功后需要在后续所有请求的header中携带token，格式为：`Authorization: Bearer {token}`
+**备注**: 这个接口不需要登录即可访问。登录成功后，应用会将token保存在本地，之后所有需要认证的接口都通过请求头中的Authorization字段携带此token。
 
 #### 1.2 获取用户信息
 
@@ -65,6 +66,8 @@ GET /user/profile
 **描述**: 获取当前登录用户的详细信息
 
 **请求参数**: 无
+
+**认证要求**: 是
 
 **响应示例**:
 
@@ -83,6 +86,64 @@ GET /user/profile
 }
 ```
 
+#### 1.3 检查登录状态
+
+```
+GET /auth/check
+```
+
+**描述**: 检查当前用户的登录状态是否有效
+
+**请求参数**: 无
+
+**响应示例**:
+
+```json
+{
+  "code": 200,
+  "message": "登录状态有效",
+  "data": {
+    "isLoggedIn": true,
+    "userId": "wx_123456789"
+  }
+}
+```
+
+#### 1.4 获取详细个人信息
+
+```
+GET /user/details
+```
+
+**描述**: 获取用户的详细个人信息（点击"我的"页面头像时调用）
+
+**请求参数**: 无
+
+**认证要求**: 是
+
+**响应示例**:
+
+```json
+{
+  "code": 200,
+  "message": "获取成功",
+  "data": {
+    "id": "wx_123456789",
+    "userId": "888888",
+    "name": "用户名",
+    "description": "情感陪伴用户",
+    "avatar": "https://example.com/avatar.jpg",
+    "email": "user@example.com",
+    "registerDate": "2025-01-15",
+    "vipLevel": 1,
+    "vipExpireDate": "2025-12-31",
+    "balance": 100.00,
+    "totalDigitalHumans": 3,
+    "totalChatMinutes": 120
+  }
+}
+```
+
 ### 2. 数字人相关接口
 
 #### 2.1 获取数字人列表
@@ -94,6 +155,8 @@ GET /digital-humans
 **描述**: 获取当前用户的所有数字人列表
 
 **请求参数**: 无
+
+**认证要求**: 是
 
 **响应示例**:
 
@@ -147,6 +210,8 @@ POST /digital-humans
 | personality | String | 是 | 性格特征，可选值: "温柔善解人意"、"聪明伶牙俐齿" |
 | avatarUrl | String | 否 | 头像URL，可为空 |
 
+**认证要求**: 是
+
 **响应示例**:
 
 ```json
@@ -177,6 +242,8 @@ GET /digital-humans/{id}
 | 参数名 | 类型 | 是否必须 | 描述 |
 | ----- | ---- | ------- | ---- |
 | id | String | 是 | 数字人ID |
+
+**认证要求**: 是
 
 **响应示例**:
 
@@ -218,6 +285,8 @@ PUT /digital-humans/{id}
 | personality | String | 否 | 性格特征，可选值: "温柔善解人意"、"聪明伶牙俐齿" |
 | avatarUrl | String | 否 | 头像URL |
 
+**认证要求**: 是
+
 **响应示例**:
 
 ```json
@@ -249,6 +318,8 @@ DELETE /digital-humans/{id}
 | ----- | ---- | ------- | ---- |
 | id | String | 是 | 数字人ID |
 
+**认证要求**: 是
+
 **响应示例**:
 
 ```json
@@ -274,6 +345,8 @@ POST /chat/start
 | 参数名 | 类型 | 是否必须 | 描述 |
 | ----- | ---- | ------- | ---- |
 | digitalHumanId | String | 是 | 数字人ID |
+
+**认证要求**: 是
 
 **响应示例**:
 
@@ -302,6 +375,8 @@ POST /chat/end
 | 参数名 | 类型 | 是否必须 | 描述 |
 | ----- | ---- | ------- | ---- |
 | sessionId | String | 是 | 会话ID |
+
+**认证要求**: 是
 
 **响应示例**:
 
@@ -335,6 +410,8 @@ GET /memories
 | page | Integer | 否 | 页码，默认为1 |
 | size | Integer | 否 | 每页大小，默认为20 |
 | digitalHumanId | String | 否 | 数字人ID，可筛选特定数字人的记忆 |
+
+**认证要求**: 是
 
 **响应示例**:
 
@@ -383,6 +460,8 @@ POST /memories
 | digitalHumanId | String | 是 | 关联的数字人ID |
 | imageUrl | String | 否 | 相关图片URL |
 
+**认证要求**: 是
+
 **响应示例**:
 
 ```json
@@ -412,6 +491,8 @@ GET /memories/{id}
 | 参数名 | 类型 | 是否必须 | 描述 |
 | ----- | ---- | ------- | ---- |
 | id | String | 是 | 记忆ID |
+
+**认证要求**: 是
 
 **响应示例**:
 
@@ -448,6 +529,8 @@ DELETE /memories/{id}
 | ----- | ---- | ------- | ---- |
 | id | String | 是 | 记忆ID |
 
+**认证要求**: 是
+
 **响应示例**:
 
 ```json
@@ -455,6 +538,162 @@ DELETE /memories/{id}
   "code": 200,
   "message": "删除成功",
   "data": null
+}
+```
+
+### 5. 充值相关接口
+
+#### 5.1 获取充值套餐列表
+
+```
+GET /payment/packages
+```
+
+**描述**: 获取可用的充值套餐列表
+
+**请求参数**: 无
+
+**认证要求**: 是
+
+**响应示例**:
+
+```json
+{
+  "code": 200,
+  "message": "获取成功",
+  "data": [
+    {
+      "id": "1",
+      "name": "月卡",
+      "description": "30天无限视频对话",
+      "price": 30.00,
+      "originalPrice": 40.00,
+      "duration": 30,
+      "benefits": ["无限视频对话", "优先客服支持"]
+    },
+    {
+      "id": "2", 
+      "name": "季卡",
+      "description": "90天无限视频对话",
+      "price": 80.00,
+      "originalPrice": 120.00,
+      "duration": 90,
+      "benefits": ["无限视频对话", "优先客服支持", "专属头像框"]
+    },
+    {
+      "id": "3",
+      "name": "年卡",
+      "description": "365天无限视频对话",
+      "price": 298.00,
+      "originalPrice": 480.00,
+      "duration": 365,
+      "benefits": ["无限视频对话", "优先客服支持", "专属头像框", "生日提醒"]
+    }
+  ]
+}
+```
+
+#### 5.2 创建充值订单
+
+```
+POST /payment/orders
+```
+
+**描述**: 创建充值订单
+
+**请求参数**:
+
+| 参数名 | 类型 | 是否必须 | 描述 |
+| ----- | ---- | ------- | ---- |
+| packageId | String | 是 | 充值套餐ID |
+| paymentMethod | String | 是 | 支付方式，可选值："wechat"(微信支付)、"alipay"(支付宝) |
+
+**认证要求**: 是
+
+**响应示例**:
+
+```json
+{
+  "code": 200,
+  "message": "订单创建成功",
+  "data": {
+    "orderId": "order_123456789",
+    "amount": 30.00,
+    "packageName": "月卡",
+    "createTime": "2025-03-25 18:30:00",
+    "expiryTime": "2025-03-25 18:45:00", // 订单有效期
+    "paymentParams": {
+      "appId": "wx123456789",
+      "timeStamp": "1585847525",
+      "nonceStr": "random_string",
+      "package": "prepay_id=wx123456789",
+      "signType": "MD5",
+      "paySign": "sign_string"
+    }
+  }
+}
+```
+
+#### 5.3 获取充值记录
+
+```
+GET /payment/records
+```
+
+**描述**: 获取用户的充值记录
+
+**请求参数**:
+
+| 参数名 | 类型 | 是否必须 | 描述 |
+| ----- | ---- | ------- | ---- |
+| page | Integer | 否 | 页码，默认为1 |
+| size | Integer | 否 | 每页大小，默认为20 |
+
+**认证要求**: 是
+
+**响应示例**:
+
+```json
+{
+  "code": 200,
+  "message": "获取成功",
+  "data": {
+    "total": 3,
+    "list": [
+      {
+        "id": "record_1",
+        "orderId": "order_123456789",
+        "packageName": "月卡",
+        "amount": 30.00,
+        "paymentMethod": "微信支付",
+        "status": "支付成功",
+        "paymentTime": "2025-03-25 18:35:20",
+        "validityPeriod": "2025-03-25 至 2025-04-24"
+      },
+      {
+        "id": "record_2",
+        "orderId": "order_987654321",
+        "packageName": "季卡",
+        "amount": 80.00,
+        "paymentMethod": "支付宝",
+        "status": "支付成功",
+        "paymentTime": "2025-02-15 10:20:30",
+        "validityPeriod": "2025-02-15 至 2025-05-15"
+      },
+      {
+        "id": "record_3",
+        "orderId": "order_111222333",
+        "packageName": "月卡",
+        "amount": 30.00,
+        "paymentMethod": "微信支付",
+        "status": "支付失败",
+        "paymentTime": "2025-01-05 14:25:10",
+        "validityPeriod": ""
+      }
+    ],
+    "page": 1,
+    "size": 20
+  }
 }
 ```
 
@@ -469,7 +708,11 @@ DELETE /memories/{id}
   "name": "String", // 用户名称
   "description": "String", // 用户描述
   "avatar": "String", // 头像URL
-  "email": "String" // 邮箱
+  "email": "String", // 邮箱
+  "registerDate": "String", // 注册日期
+  "vipLevel": "Integer", // VIP等级
+  "vipExpireDate": "String", // VIP到期日期
+  "balance": "Double" // 账户余额
 }
 ```
 
@@ -498,12 +741,48 @@ DELETE /memories/{id}
 }
 ```
 
+### 充值套餐模型 (Package)
+
+```json
+{
+  "id": "String", // 套餐唯一标识
+  "name": "String", // 套餐名称
+  "description": "String", // 套餐描述
+  "price": "Double", // 当前价格
+  "originalPrice": "Double", // 原价
+  "duration": "Integer", // 有效期(天)
+  "benefits": ["String"] // 套餐权益列表
+}
+```
+
+### 充值记录模型 (PaymentRecord)
+
+```json
+{
+  "id": "String", // 记录唯一标识
+  "orderId": "String", // 订单ID
+  "packageName": "String", // 套餐名称
+  "amount": "Double", // 支付金额
+  "paymentMethod": "String", // 支付方式
+  "status": "String", // 支付状态
+  "paymentTime": "String", // 支付时间
+  "validityPeriod": "String" // 有效期
+}
+```
+
 ## 接口调用说明
+
+### 客户端登录态管理
+- 客户端通过微信登录获取token后，将token存储在本地
+- 所有需要登录态的功能，客户端通过检查本地是否存在有效token来判断用户是否已登录
+- 若本地无token或token已过期，则提示用户登录
+- 登录成功后，服务端返回的token会被客户端保存在本地，用于后续的接口调用
 
 ### 访问控制
 - 首页无需登录即可访问
-- 创建数字人、开始视频对话、记忆库、我的页面需要登录后才能访问
-- 未登录状态下点击相关功能会跳转到登录页
+- 点击"首页"中"创建新的数字人"、"开始视频对话"时，客户端会检查本地是否存在token，未登录时提示跳转至登录页面
+- 点击"记忆库"底部导航栏按钮时，客户端会检查本地是否存在token，未登录时跳转至登录页面
+- "我的"页面中"关于我们"、"隐私保护"以外的页面，客户端会检查本地是否存在token，未登录时跳转至登录页面
 
 ### 关系和性格特征选项
 创建数字人时：
