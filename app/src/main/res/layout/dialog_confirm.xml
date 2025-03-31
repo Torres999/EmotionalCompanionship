@@ -25,7 +25,7 @@
             android:paddingBottom="40dp"
             android:text="是否开始视频对话"
             android:textColor="@android:color/black"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <!-- 分隔线 -->
         <View
