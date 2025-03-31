@@ -45,6 +45,11 @@
             android:name=".ui.auth.LoginActivity"
             android:exported="false"
             android:theme="@style/Theme.EmotionalCompanionship.NoActionBar" />
+        
+        <activity
+            android:name=".ui.webview.WebViewActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EmotionalCompanionship.NoActionBar" />
 
     </application>
 

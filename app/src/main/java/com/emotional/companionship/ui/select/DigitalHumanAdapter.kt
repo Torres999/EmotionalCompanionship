@@ -1,6 +1,5 @@
 package com.emotional.companionship.ui.select
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +30,6 @@ class DigitalHumanAdapter(
     fun submitList(list: List<DigitalHuman>) {
         digitalHumans = list
         notifyDataSetChanged()
-        Log.d("DigitalHumanAdapter", "提交列表，数据项数: ${list.size}，总项数: ${list.size + 1}")
     }
 
     /**
@@ -49,16 +47,13 @@ class DigitalHumanAdapter(
      * 获取总项目数 - 数字人列表 + 添加按钮
      */
     override fun getItemCount(): Int {
-        val count = digitalHumans.size + 1
-        Log.d("DigitalHumanAdapter", "项目总数: $count (数字人: ${digitalHumans.size}, 添加按钮: 1)")
-        return count
+        return digitalHumans.size + 1
     }
 
     /**
      * 创建视图持有者
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        Log.d("DigitalHumanAdapter", "创建视图持有者，类型: ${if (viewType == ITEM_TYPE_DIGITAL_HUMAN) "数字人" else "添加按钮"}")
         return when (viewType) {
             ITEM_TYPE_DIGITAL_HUMAN -> {
                 val view = LayoutInflater.from(parent.context)
@@ -78,7 +73,6 @@ class DigitalHumanAdapter(
      * 绑定视图持有者
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Log.d("DigitalHumanAdapter", "绑定视图持有者，位置: $position, 类型: ${if (position < digitalHumans.size) "数字人" else "添加按钮"}")
         when (holder) {
             is DigitalHumanViewHolder -> {
                 val item = digitalHumans[position]
@@ -87,7 +81,6 @@ class DigitalHumanAdapter(
             is AddDigitalHumanViewHolder -> {
                 // 设置整个卡片的点击事件
                 holder.itemView.setOnClickListener {
-                    Log.d("DigitalHumanAdapter", "添加卡片点击")
                     // 直接触发添加新数字人的操作
                     val context = holder.itemView.context
                     if (context is SelectDigitalHumanActivity) {
@@ -108,24 +101,27 @@ class DigitalHumanAdapter(
         private val tvName: TextView = itemView.findViewById(R.id.tvName)
         private val tvLastChat: TextView = itemView.findViewById(R.id.tvLastChat)
         private val ivAvatar: ImageView = itemView.findViewById(R.id.ivAvatar)
+        private val btnStartChat: android.widget.Button = itemView.findViewById(R.id.btnStartChat)
 
         fun bind(digitalHuman: DigitalHuman) {
             tvName.text = digitalHuman.name
             tvLastChat.text = "上次对话: ${digitalHuman.lastChatTime}"
             
-            // 简化Glide使用，避免多余的配置
             try {
-                // 使用try-catch包裹Glide调用，防止崩溃
                 Glide.with(itemView.context)
                     .load(digitalHuman.avatarUrl.takeIf { !it.isNullOrEmpty() } ?: R.drawable.ic_person)
                     .error(R.drawable.ic_person)
                     .into(ivAvatar)
             } catch (e: Exception) {
-                // 如果Glide加载失败，直接设置默认图片
                 ivAvatar.setImageResource(R.drawable.ic_person)
             }
             
-            itemView.setOnClickListener {
+            // 禁用整个卡片的点击事件
+            itemView.isClickable = false
+            itemView.isFocusable = false
+            
+            // 设置按钮点击事件
+            btnStartChat.setOnClickListener {
                 onItemClick(digitalHuman)
             }
         }

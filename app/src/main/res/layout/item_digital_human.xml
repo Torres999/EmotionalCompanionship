@@ -37,9 +37,9 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:scaleType="centerCrop"
+                android:layout_gravity="top"
                 android:clickable="false"
                 android:focusable="false"
-                android:layout_gravity="top"
                 tools:src="@tools:sample/avatars" />
 
             <LinearLayout
@@ -47,9 +47,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:orientation="vertical"
+                android:layout_gravity="top"
                 android:clickable="false"
                 android:focusable="false"
-                android:layout_gravity="top"
                 android:background="@null">
 
                 <TextView
@@ -80,9 +80,9 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/divider"
             android:clickable="false"
-            android:focusable="false"/>
+            android:focusable="false"
+            android:background="@color/divider"/>
 
         <!-- 按钮区域 -->
         <Button
@@ -90,15 +90,12 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_margin="16dp"
-            android:text="开始视频对话"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:background="@drawable/bg_gradient_button"
-            android:foreground="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:soundEffectsEnabled="true"
-            style="@style/Widget.AppCompat.Button"/>
+            android:text="开始视频对话"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:background="@drawable/bg_home_button" />
 
     </LinearLayout>
 

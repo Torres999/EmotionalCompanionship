@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 对话框样式，标题和内容居中 -->
+    <style name="CenteredDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textAlignment">center</item>
+        <item name="android:windowTitleStyle">@style/CenteredTitleStyle</item>
+        <item name="android:buttonBarStyle">@style/CenteredButtonBar</item>
+    </style>
+
+    <!-- 对话框标题居中样式 -->
+    <style name="CenteredTitleStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:gravity">center</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <!-- 按钮栏居中样式 -->
+    <style name="CenteredButtonBar" parent="Widget.AppCompat.ButtonBar.AlertDialog">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+</resources> 

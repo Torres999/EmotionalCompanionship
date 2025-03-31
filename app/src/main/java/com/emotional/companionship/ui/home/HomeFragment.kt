@@ -1,16 +1,17 @@
 package com.emotional.companionship.ui.home
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +19,7 @@ import com.emotional.companionship.R
 import com.emotional.companionship.data.model.DigitalHuman
 import com.emotional.companionship.databinding.FragmentHomeBinding
 import com.emotional.companionship.ui.create.CreateDigitalHumanActivity
+import com.emotional.companionship.ui.webview.WebViewActivity
 import com.emotional.companionship.util.UserSessionManager
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -62,11 +64,12 @@ class HomeFragment : Fragment() {
         // 初始化适配器
         adapter = DigitalHumanAdapter(
             onButtonClick = { digitalHuman ->
-                Log.d(TAG, "数字人按钮点击: ${digitalHuman.name}")
-                activity?.runOnUiThread {
-                    if (isAdded && !isDetached) {
-                        showDialog(digitalHuman)
-                    }
+                Log.d(TAG, "数字人按钮点击回调触发: ${digitalHuman.name}")
+                if (isAdded && !isDetached) {
+                    Log.d(TAG, "准备显示对话框")
+                    showDialog(digitalHuman)
+                } else {
+                    Log.e(TAG, "Fragment已分离，无法显示对话框")
                 }
             },
             onAddClick = {
@@ -91,33 +94,40 @@ class HomeFragment : Fragment() {
     private fun showDialog(digitalHuman: DigitalHuman) {
         Log.d(TAG, "showDialog: 显示对话框，数字人: ${digitalHuman.name}")
         try {
-            AlertDialog.Builder(requireContext()).apply {
-                setTitle("开始对话")
-                setMessage("是否开始与${digitalHuman.name}对话？")
-                setPositiveButton("确认") { dialog, _ ->
-                    dialog.dismiss()
+            val activity = activity
+            if (activity == null || !isAdded) {
+                Log.e(TAG, "Fragment未关联Activity，无法显示对话框")
+                return
+            }
+            
+            // 使用自定义对话框
+            com.emotional.companionship.ui.dialog.ConfirmDialog.show(
+                context = activity,
+                message = "是否开始视频对话",
+                confirmText = "确认",
+                onConfirm = {
+                    Log.d(TAG, "对话框确认按钮点击")
                     openBingWebsite()
                 }
-                setNegativeButton("取消") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                create().show()
-            }
+            )
         } catch (e: Exception) {
             Log.e(TAG, "显示对话框出错", e)
+            activity?.let {
+                if (isAdded) {
+                    Toast.makeText(it, "无法显示对话框: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
     
     private fun openBingWebsite() {
         Log.d(TAG, "openBingWebsite: 打开Bing网站")
         try {
-            Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse("https://www.bing.com")
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            }.takeIf { intent ->
-                intent.resolveActivity(requireContext().packageManager) != null
-            }?.let { startActivity(it) }
-            ?: Toast.makeText(requireContext(), "未找到可用浏览器", Toast.LENGTH_SHORT).show()
+            // 使用WebViewActivity打开页面，而不是调用外部浏览器
+            val intent = Intent(requireContext(), WebViewActivity::class.java).apply {
+                putExtra("url", "https://www.bing.com")
+            }
+            startActivity(intent)
         } catch (e: Exception) {
             Log.e(TAG, "打开网站出错", e)
             Toast.makeText(requireContext(), "功能暂不可用", Toast.LENGTH_SHORT).show()

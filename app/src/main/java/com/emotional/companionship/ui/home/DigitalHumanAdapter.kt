@@ -33,7 +33,6 @@ class DigitalHumanAdapter(
     fun submitList(list: List<DigitalHuman>) {
         digitalHumans = list
         notifyDataSetChanged()
-        Log.d("DigitalHumanAdapter", "提交列表，数据项数: ${list.size}，总项数: ${list.size + 1}")
     }
 
     /**
@@ -51,16 +50,13 @@ class DigitalHumanAdapter(
      * 获取总项目数 - 数字人列表 + 添加按钮
      */
     override fun getItemCount(): Int {
-        val count = digitalHumans.size + 1
-        Log.d("DigitalHumanAdapter", "项目总数: $count (数字人: ${digitalHumans.size}, 添加按钮: 1)")
-        return count
+        return digitalHumans.size + 1
     }
 
     /**
      * 创建视图持有者
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        Log.d("DigitalHumanAdapter", "创建视图持有者，类型: ${if (viewType == ITEM_TYPE_DIGITAL_HUMAN) "数字人" else "添加按钮"}")
         return when (viewType) {
             ITEM_TYPE_DIGITAL_HUMAN -> {
                 val view = LayoutInflater.from(parent.context)
@@ -80,7 +76,6 @@ class DigitalHumanAdapter(
      * 绑定视图持有者
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Log.d("DigitalHumanAdapter", "绑定视图持有者，位置: $position, 类型: ${if (position < digitalHumans.size) "数字人" else "添加按钮"}")
         when (holder) {
             is DigitalHumanViewHolder -> {
                 val item = digitalHumans[position]
@@ -93,20 +88,22 @@ class DigitalHumanAdapter(
                     holder.itemView.layoutParams = params
                 }
                 
-                // 设置按钮点击监听
-                holder.btnStartChat.setOnClickListener {
-                    Log.d("DigitalHumanAdapter", "按钮点击: ${item.name}")
-                    onButtonClick(item)
-                }
-                
-                // 确保内容区域不可点击
+                // 明确禁用整个卡片的点击事件
+                holder.itemView.isClickable = false
+                holder.itemView.isFocusable = false
                 holder.contentArea.isClickable = false
                 holder.contentArea.isFocusable = false
+                
+                // 设置按钮点击监听
+                holder.btnStartChat.isClickable = true
+                holder.btnStartChat.isFocusable = true
+                holder.btnStartChat.setOnClickListener {
+                    onButtonClick(item)
+                }
             }
             is AddDigitalHumanViewHolder -> {
                 // 设置整个卡片的点击事件
                 holder.itemView.setOnClickListener {
-                    Log.d("DigitalHumanAdapter", "添加卡片点击")
                     onAddClick()
                 }
             }
@@ -129,14 +126,6 @@ class DigitalHumanAdapter(
             
             // 设置头像
             ivAvatar.setImageResource(R.drawable.ic_launcher_foreground)
-            
-            // 确保所有子视图不可点击
-            ivAvatar.isClickable = false
-            ivAvatar.isFocusable = false
-            tvName.isClickable = false
-            tvName.isFocusable = false
-            tvLastChat.isClickable = false
-            tvLastChat.isFocusable = false
         }
     }
 

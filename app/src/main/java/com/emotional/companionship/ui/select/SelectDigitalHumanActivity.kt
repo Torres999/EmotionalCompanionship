@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -16,7 +17,7 @@ import com.emotional.companionship.databinding.ActivitySelectDigitalHumanBinding
 import com.emotional.companionship.ui.create.CreateDigitalHumanActivity
 import com.emotional.companionship.data.model.DigitalHuman
 import com.emotional.companionship.ui.profile.ProfileFragment
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.emotional.companionship.ui.webview.WebViewActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -100,38 +101,19 @@ class SelectDigitalHumanActivity : AppCompatActivity() {
         binding.clContent.visibility = View.VISIBLE
         binding.fragmentContainer.visibility = View.GONE
         
-        // 移除现有的Fragment
-        val fragment = supportFragmentManager.findFragmentByTag("profile_fragment")
-        if (fragment != null) {
-            supportFragmentManager.beginTransaction()
-                .remove(fragment)
-                .commit()
-        }
-        
-        // 移除"记忆库"Fragment（如果有）
-        val memoryFragment = supportFragmentManager.findFragmentByTag("memory_fragment")
-        if (memoryFragment != null) {
-            supportFragmentManager.beginTransaction()
-                .remove(memoryFragment)
-                .commit()
-        }
+        // 移除所有Fragment
+        removeAllFragments()
     }
     
     private fun showHistoryContent() {
         // 隐藏主页内容
         binding.clContent.visibility = View.GONE
-        
-        // 移除个人中心Fragment（如果有）
-        val profileFragment = supportFragmentManager.findFragmentByTag("profile_fragment")
-        if (profileFragment != null) {
-            supportFragmentManager.beginTransaction()
-                .remove(profileFragment)
-                .commit()
-        }
-        
-        // 添加记忆库Fragment
         binding.fragmentContainer.visibility = View.VISIBLE
         
+        // 移除所有Fragment
+        removeAllFragments()
+        
+        // 添加记忆库Fragment
         var memoryFragment = supportFragmentManager.findFragmentByTag("memory_fragment") as? com.emotional.companionship.ui.memory.MemoryFragment
         
         if (memoryFragment == null) {
@@ -145,8 +127,12 @@ class SelectDigitalHumanActivity : AppCompatActivity() {
     private fun showProfileContent() {
         // 隐藏主页内容
         binding.clContent.visibility = View.GONE
+        binding.fragmentContainer.visibility = View.VISIBLE
         
-        // 添加个人中心Fragment，确保不会重复添加
+        // 移除所有Fragment
+        removeAllFragments()
+        
+        // 添加个人中心Fragment
         var profileFragment = supportFragmentManager.findFragmentByTag("profile_fragment") as? ProfileFragment
         
         if (profileFragment == null) {
@@ -155,8 +141,20 @@ class SelectDigitalHumanActivity : AppCompatActivity() {
                 .replace(R.id.fragment_container, profileFragment, "profile_fragment")
                 .commit()
         }
+    }
+    
+    private fun removeAllFragments() {
+        val fragments = arrayOf(
+            supportFragmentManager.findFragmentByTag("profile_fragment"),
+            supportFragmentManager.findFragmentByTag("memory_fragment")
+        )
         
-        binding.fragmentContainer.visibility = View.VISIBLE
+        supportFragmentManager.beginTransaction().apply {
+            fragments.filterNotNull().forEach { remove(it) }
+            if (fragments.any { it != null }) {
+                commit()
+            }
+        }
     }
 
     private fun setupObservers() {
@@ -170,10 +168,38 @@ class SelectDigitalHumanActivity : AppCompatActivity() {
                     CreateDigitalHumanActivity.start(this)
                 }
                 is SelectDigitalHumanViewModel.NavigationEvent.NavigateToChat -> {
-                    Toast.makeText(this, "即将与${event.digitalHuman.name}聊天", Toast.LENGTH_SHORT).show()
-                    // TODO: Navigate to chat screen
+                    // 无需传递digitalHuman参数
+                    showConfirmDialog()
                 }
             }
+        }
+    }
+    
+    private fun showConfirmDialog() {
+        try {
+            // 使用自定义对话框
+            com.emotional.companionship.ui.dialog.ConfirmDialog.show(
+                context = this,
+                message = "是否开始视频对话",
+                confirmText = "确认",
+                onConfirm = {
+                    openBingWebsite()
+                }
+            )
+        } catch (e: Exception) {
+            Toast.makeText(this, "无法显示对话框: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+    
+    private fun openBingWebsite() {
+        try {
+            // 使用WebView打开页面，而不是调用外部浏览器
+            val intent = Intent(this, WebViewActivity::class.java).apply {
+                putExtra("url", "https://www.bing.com")
+            }
+            startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(this, "功能暂不可用", Toast.LENGTH_SHORT).show()
         }
     }
 
